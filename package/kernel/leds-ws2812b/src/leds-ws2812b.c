@@ -124,9 +124,7 @@ static int ws2812b_probe(struct spi_device *spi)
 	for (i = 0; i < num_leds * WS2812B_NUM_COLORS; i++)
 		ws2812b_set_byte(priv, i, 0);
 
-	ret = devm_mutex_init(dev, &priv->mutex);
-	if (ret)
-		return ret;
+	mutex_init(&priv->mutex);
 
 	priv->num_leds = num_leds;
 	priv->spi = spi;
